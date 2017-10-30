@@ -1,23 +1,20 @@
 package tags;
 
-import java.io.IOException;
-import java.util.Calendar;
-import javax.servlet.jsp.JspWriter;
+import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 public class DebugTag extends TagSupport {
 
     @Override
-    public int doStartTag() throws JspException {  
-        JspWriter out=pageContext.getOut();//returns the instance of JspWriter  
-        try{  
-            out.print(Calendar.getInstance().getTime());//printing date and time using JspWriter  
+    public int doStartTag() throws JspException {
+        ServletRequest request = pageContext.getRequest();
+        if (request.getParameter("debug") != null && request.getServerName().startsWith("test")){
+            return EVAL_BODY_INCLUDE; 
         }
-        catch(IOException e){
-            System.out.println(e);
-        }  
-        return SKIP_BODY;//will not evaluate the body content of the tag  
+        else{
+            return SKIP_BODY; 
+        }
     }  
    
     

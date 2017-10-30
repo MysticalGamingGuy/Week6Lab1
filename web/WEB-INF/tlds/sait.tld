@@ -6,5 +6,6 @@
     <tag>
         <name>DebugTag</name>
         <tag-class>tags.DebugTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 </taglib>
